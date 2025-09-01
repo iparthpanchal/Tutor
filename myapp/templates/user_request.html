@@ -1,0 +1,223 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block main%}
+{% include 'messages.html'%}
+<style>
+    .table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.table thead th {
+    background: #3498db;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.table tbody td {
+    padding: 15px;
+    background: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background-color: #ecf0f1;
+    transform: translateY(-5px);
+    transition: all 0.3s ease-in-out;
+}
+
+.table td {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.table td:nth-child(4),
+.table td:nth-child(5),
+.table td:nth-child(6) {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.table .btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 25px;
+    transition: all 0.4s ease;
+}
+
+.btn-success {
+    background: #27ae60;
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background: #2ecc71;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Table for Mobile */
+@media (max-width: 768px) {
+    .table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .table thead, .table tbody, .table th, .table td, .table tr {
+        display: block;
+    }
+
+    .table tbody td {
+        text-align: left;
+        padding: 15px;
+    }
+
+    .table tbody td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        padding-right: 10px;
+    }
+}
+
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f9;
+
+</style>
+
+   <main>
+
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         data-background="/static/assets/img/breadcrumb/breadcrumb-bg.jpg">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content p-relative z-index-1">
+                     <h3 class="breadcrumb__title">Request</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span>Request</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+
+<div class="section section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="container my-5">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td>{{ order.tutor.name }}</td>
+                                <td>{{ order.booking_start_date }}</td>
+                                <td>{{ order.booking_end_date }}</td>
+                                <td>{{ order.total_cost }}</td>
+                                <td>
+                                    {% if order.status == 'pending' %}
+                                        {% if is_freelancer %}
+                                            <form method="post" style="display: inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="order_id" value="{{ order.id }}">
+                                                <button type="submit" name="accept" class="btn btn-success">Accept</button>
+                                                <button type="submit" name="reject" class="btn btn-danger">Reject</button>
+                                            </form>
+                                        {% else %}
+                                            <span>Pending</span>
+                                        {% endif %}
+                                    {% elif order.status == 'accepted' %}
+                                        {% if not is_freelancer %}
+                                            <form method="post" style="display: inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="order_id" value="{{ order.id }}">
+                                                <button type="submit" class="btn btn-primary">Pay Now</button>
+                                            </form>
+                                        {% else %}
+                                            <span>Accepted</span>
+                                        {% endif %}
+                                    {% elif order.status == 'paid' %}
+                                        <span>Paid</span>
+                                    {% else %}
+                                        <div class="text-danger">Rejected</div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% if razorpay_payment %}
+                    <form method="POST" action="{% url 'payment_status' %}">
+                        {% csrf_token %}
+                        <script
+                            src="https://checkout.razorpay.com/v1/checkout.js"
+                            data-key="rzp_test_VQhEfe2NCXbbwI"
+                            data-amount="{{ razorpay_payment.amount }}"
+                            data-currency="INR"
+                            data-order_id="{{ razorpay_payment.order_id }}"
+                            data-buttontext="Pay with Razorpay"
+                            data-name="Arc"
+                            data-description="A Wild Sheep Chase is the third novel by Japanese author Haruki Murakami"
+                            data-image="https://example.com/your_logo.jpg"
+                            data-prefill.name="{{ razorpay_payment.name }}"
+                            data-prefill.email="gaurav.kumar@example.com"
+                            data-theme.color="#F37254"
+                        ></script>
+
+                        <input type="hidden" name="order_id" value="{{ order.id }}" />
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+   </main>
+
+{%endblock%}

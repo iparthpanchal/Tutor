@@ -1,0 +1,181 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block main%}
+{% include 'messages.html'%}
+   <main>
+
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         data-background="/static/assets/img/breadcrumb/breadcrumb-bg-2.jpg">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content p-relative z-index-1">
+                     <h3 class="breadcrumb__title">Add Expertise</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span>Add Expertise</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+
+<!-- templates/add_expertise.html -->
+ <section class="contact__area pt-115 pb-120">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="contact__wrapper p-4 border rounded shadow-sm bg-white">
+          <div class="section__title-wrapper mb-4 text-center">
+            <h2 class="section__title">Add Your <span class="yellow-bg yellow-bg-big">Expertise</span></h2>
+          </div>
+
+          <form method="GET" action="{% url 'add_expertise' %}">
+    <br><br>
+    <label class="form-label">Category</label><br>
+    <select name="category" onchange="this.form.submit()">
+        <option value="">-- Select Category --</option>
+        {% for cat in categories %}
+        <option value="{{ cat.id }}" {% if cat.id|stringformat:"s" == selected_category_id %}selected{% endif %}>{{ cat.cate_name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<form method="GET" action="{% url 'add_expertise' %}">
+    <input type="hidden" name="category" value="{{ selected_category_id }}">
+    <br><br>
+    <label class="form-label">Course</label><br>
+    <select name="course" onchange="this.form.submit()">
+        <option value="">-- Select Course --</option>
+        {% for course in courses %}
+        <option value="{{ course.id }}" {% if course.id|stringformat:"s" == selected_course_id %}selected{% endif %}>{{ course.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<!-- For Subject -->
+<form method="POST" enctype="multipart/form-data" action="{% url 'add_expertise' %}">
+    {% csrf_token %}
+    <input type="hidden" name="category" value="{{ selected_category_id }}">
+    <input type="hidden" name="course" value="{{ selected_course_id }}">
+    <br><br>
+    <label class="form-label">Subject</label><br>
+    <select name="subject" required>
+        <option value="">-- Select Subject --</option>
+        {% for subject in subjects %}
+        <option value="{{ subject.id }}">{{ subject.name }}</option>
+        {% endfor %}
+    </select>
+
+                        <div class="mb-3">
+                           <br><br>
+                            <label class="form-label">Hourly Rate</label>
+                            <input type="number" name="hourly_rate" class="form-control" step="0.01" required>
+                        </div>
+
+                        <div class="mb-3">
+                           <br><br>
+                            <label class="form-label">Duration Per Day(Hours)</label>
+                            <input type="number" name="duration_per_day" class="form-control" step="0.01" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Experience (Years)</label>
+                            <input type="number" name="experience_years" class="form-control" min="0" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Qualification</label>
+                            <input type="text" name="qualification" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Languages</label>
+                            <input type="text" name="languages" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Bio</label>
+                            <textarea name="bio" class="form-control"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Available Days</label>
+                            <input type="text" name="available_days" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Profile Image</label>
+                            <input type="file" name="profile_image" class="form-control">
+                        </div>
+
+    <!-- Your other form fields -->
+
+    <button class="e-btn w-100"  type="submit" >Submit</button>
+</form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    function populateDropdown(selectElement, data, placeholder) {
+        selectElement.innerHTML = `<option value="">${placeholder}</option>`;
+        if (data) {
+            data.forEach(item => {
+                selectElement.innerHTML += `<option value="${item.id}">${item.name}</option>`;
+            });
+        }
+    }
+
+    const categorySelect = document.getElementById('category');
+    const courseSelect = document.getElementById('course');
+    const subjectSelect = document.getElementById('subject');
+
+    categorySelect.addEventListener('change', function() {
+        let categoryId = this.value;
+
+        // Reset dependent dropdowns
+        populateDropdown(courseSelect, [], '-- Select Course --');
+        populateDropdown(subjectSelect, [], '-- Select Subject --');
+
+        if (categoryId) {
+            fetch(`/get-courses/${categoryId}/`)
+            .then(res => res.json())
+            .then(data => {
+                populateDropdown(courseSelect, data, '-- Select Course --');
+            })
+            .catch(err => console.error('Error fetching courses:', err));
+        }
+    });
+
+    courseSelect.addEventListener('change', function() {
+        let courseId = this.value;
+
+        // Reset subject dropdown
+        populateDropdown(subjectSelect, [], '-- Select Subject --');
+
+        if (courseId) {
+            fetch(`/get-subjects/${courseId}/`)
+            .then(res => res.json())
+            .then(data => {
+                populateDropdown(subjectSelect, data, '-- Select Subject --');
+            })
+            .catch(err => console.error('Error fetching subjects:', err));
+        }
+    });
+});
+</script>
+
+
+   </main>
+
+{%endblock%}

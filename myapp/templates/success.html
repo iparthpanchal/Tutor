@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block main%}
+{% include 'messages.html'%}
+<style>
+   .payment-success {
+    text-align: center;
+    font-size: 35px;
+    color: #0a0a0a; /* Dark shade */
+    padding: 20px;
+    background-color: #e6ffed; /* Light green background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    font-family: 'Poppins', sans-serif; /* Modern font */
+    font-weight: 600;
+}
+
+/* Media Query for smaller devices */
+@media (max-width: 768px) {
+    .payment-success {
+        font-size: 28px; /* Slightly smaller font on small screens */
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .payment-success {
+        font-size: 24px; /* Even smaller font on very small screens */
+        margin-top: 30px;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+}
+
+</style>
+   <main>
+
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         data-background="/static/assets/img/breadcrumb/breadcrumb-bg.jpg">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content p-relative z-index-1">
+                     <h3 class="breadcrumb__title">Payment Confirmation</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span>Payment Confirmation</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+
+<body>
+<div class="inner-page-main-wrapper float_left">
+
+   <h1 class="payment-success ">Payment Successful</h1>
+</div>
+
+</body>
+   </main>
+
+{%endblock%}

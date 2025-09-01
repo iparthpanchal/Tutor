@@ -1,0 +1,193 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block main%}
+{% include 'messages.html'%}
+   <main>
+
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         data-background="static/assets/img/breadcrumb/breadcrumb-bg.jpg">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content p-relative z-index-1">
+                     <h3 class="breadcrumb__title">Sign In</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span>Sign-in</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+
+      <!-- sign up area start -->
+      <div class="signup__area po-rel-z1 pt-100 pb-145 p-relative">
+         <div class="sign__shape">
+            <img class="man-1" src=" {% static 'assets/img/icons/about-shapes.png' %} " alt="">
+            <img class="man-2" src=" {% static 'assets/img/icons/book-shape.png' %} " alt="">
+            <img class="circle" src=" {% static 'assets/img/icons/role-shape.png' %} " alt="">
+            <img class="zigzag" src=" {% static 'assets/img/icons/lines-shape.png' %} " alt="">
+         </div>
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
+                  <div class="tp-section__title-wrapper text-center mb-55">
+                     <h2 class="tp-section__title">Sign in to <br> recharge direct.</h2>
+                     <p>it you don't have an account you can <a href="#">Register here!</a></p>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+                  <div class="sign__wrapper white-bg">
+                     <div class="sign__header mb-35">
+                        <div class="sign__in text-center">
+                           <p> <span>........</span><a href=" {% static 'sign-in.html' %} ">sign in</a> with your email<span>
+                                 ........</span> </p>
+                        </div>
+                     </div>
+                     <div class="sign__form">
+                        <form method="post" action="/login">
+                           {%csrf_token%}
+                           <div class="sign__input-wrapper mb-25">
+                              <h5>Work email</h5>
+                              <div class="sign__input">
+                                 <input type="text" placeholder="e-mail address" name="email2"
+                                        oninput="
+                                                   const email = this.value.trim();
+                                                   const isValidEmailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                                                   const containsGmail = email.includes('@gmail.com');
+
+                                                   if (!isValidEmailFormat || !containsGmail) {
+                                                       this.setCustomValidity('Please enter a valid Gmail address');
+                                                       this.reportValidity();
+                                                   } else {
+                                                       this.setCustomValidity('');
+                                                       this.reportValidity();
+                                                   }
+								        ">
+                                 <i class="fal fa-envelope"></i>
+                              </div>
+                           </div>
+                           <div class="sign__input-wrapper mb-10">
+                              <h5>Password</h5>
+                              <div class="sign__input">
+                                 <input type="text" placeholder="Password" name="password2"
+                                        oninput="
+                                                   const password = this.value.trim();
+                                                   const hasLowerCase = /[a-z]/.test(password);
+                                                   const hasDigit = /\d/.test(password);
+
+                                                   if (password.length < 5) {
+                                                       this.setCustomValidity('Password must be at least 5 characters long');
+                                                       this.reportValidity();
+                                                   } else if (!hasLowerCase) {
+                                                       this.setCustomValidity('Password must contain at least one lowercase letter');
+                                                       this.reportValidity();
+                                                   } else if (!hasDigit) {
+                                                       this.setCustomValidity('Password must contain at least one digit');
+                                                       this.reportValidity();
+                                                   } else {
+                                                       this.setCustomValidity('');
+                                                       this.reportValidity();
+                                                   }
+                                        ">
+                                 <i class="fal fa-lock"></i>
+                              </div>
+                           </div>
+                           <div class="sign__action d-sm-flex justify-content-between mb-30">
+                            <a href="#" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
+
+                           </div>
+                           <button class="e-btn  w-100"> <span></span> Sign In</button>
+                           <div class="sign__new text-center mt-20">
+                              <p>New to Markit? <a href="/signup">Sign Up</a></p>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- sign up area end -->
+
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/forgotpassword" method="post" class="forgot-password-form">
+                    {% csrf_token %}
+                    <div class="form-input">
+                        <label>Email</label>
+                        <input type="email" name="email2" placeholder="Enter your email" required />
+                    </div>
+                    <button type="submit" class="btn">Reset Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function openForgotPasswordModal() {
+        document.getElementById('forgotPasswordModal').style.display = 'block';
+    }
+
+    function closeForgotPasswordModal() {
+        document.getElementById('forgotPasswordModal').style.display = 'none';
+    }
+
+    function closeForm() {
+        // Redirect to the index page
+        window.location.href = '/';
+    }
+
+    function validateSignUpForm() {
+        var email = document.forms["signUpForm"]["email2"].value;
+        var password = document.forms["signUpForm"]["password2"].value;
+        if (email == "" || password == "") {
+            alert("Please fill in all fields");
+            return false;
+        }
+
+        // Password validation
+        if (password.length < 5) {
+            alert("Password must be at least 5 characters long");
+            return false;
+        }
+
+        if (!/[a-z]/.test(password)) {
+            alert("Password must contain at least one lowercase letter");
+            return false;
+        }
+
+
+        if (!/\d/.test(password)) {
+            alert("Password must contain at least one digit");
+            return false;
+        }
+        return true;
+    }
+</script>
+<!-- //form -->
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <br><br><br><br>
+
+
+   </main>
+
+{%endblock%}

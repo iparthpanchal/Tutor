@@ -1,0 +1,124 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block main%}
+{% include 'messages.html'%}
+
+   <main>
+
+        <!-- breadcrumb area start -->
+      <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         data-background="/static/assets/img/breadcrumb/breadcrumb-bg-2.jpg">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content p-relative z-index-1">
+                     <h3 class="breadcrumb__title">Tutor Detail</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span>Tutor Detail</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+
+
+      <!-- instructor details area start -->
+      <section class="teacher__area pt-100 pb-110 p-relative">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                  <div class="teacher__details-thumb p-relative w-img pr-30">
+                     <img src="{{alldata.profile_image.url}}" alt="">
+                     
+                  </div>
+               </div>
+               <div class="col-xxl-8 col-xl-8 col-lg-8">
+                  <div class="teacher__wrapper">
+                     <div class="teacher__top d-md-flex align-items-end justify-content-between">
+                        <div class="teacher__info">
+                           <h4>{{alldata.tutor.name}}</h4>
+                           <span>Subject : {{alldata.subject.name}}</span>
+                        </div>
+                        <div class="teacher__rating">
+                           <h5>Review:</h5>
+                           <div class="teacher__rating-inner d-flex align-items-center">
+                              <ul>
+                                 <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                 <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                 <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                 <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                 <li><a href="#"> <i class="icon_star"></i> </a></li>
+                              </ul>
+                              <p>4.5</p>
+                           </div>
+                        </div>
+                        <div class="teacher__social-2">
+                           <h4>Follow Us:</h4>
+                           <ul>
+                              <li>
+                                 <a href="#">
+                                    <i class="social_facebook"></i>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="#">
+                                    <i class="social_twitter"></i>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="#">
+                                    <i class="social_vimeo"></i>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="#">
+                                    <i class="social_linkedin"></i>
+                                 </a>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <br>
+                     <div>
+                        <h3>Hourly Rate</h3>
+                        <p>{{alldata.hourly_rate}}</p>
+                     </div>
+                     <div>
+                        <h3>Duration Per Day (Hour)</h3>
+                        <p>{{alldata.duration_per_day}}</p>
+                     </div>
+                     <div>
+                        <h3>Experience</h3>
+                        <p>{{alldata.experience_years}}</p>
+                     </div>
+                     <div>
+                        <h3>Qualification</h3>
+                        <p>{{alldata.qualification}}</p>
+                     </div>
+                     <div>
+                        <h3>Languages</h3>
+                        <p>{{alldata.languages}}</p>
+                     </div>
+                     <div>
+                        <h3>Availability</h3>
+                        <p>{{alldata.available_days}}</p>
+                     </div>
+                     <div>
+                        <h3>Short Bio</h3>
+                        <p>{{alldata.bio}}</p>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- instructor details area end -->
+
+
+   </main>
+{%endblock%}

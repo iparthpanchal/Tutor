@@ -1,0 +1,246 @@
+<!doctype html>
+{%load static%}
+<html class="no-js" lang="zxx">
+
+
+<!-- Mirrored from data.themeim.com/html/tutorgo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Aug 2025 05:00:36 GMT -->
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>Tutorgo - Online Learning and Education HTML Template</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- Place favicon.ico in the root directory -->
+   <link rel="shortcut icon" type="image/x-icon" href=" {% static 'assets/img/logo/favicon.png' %} ">
+
+   <!-- CSS here  -->
+   <link rel="stylesheet" href="/static/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="/static/assets/css/meanmenu.css">
+   <link rel="stylesheet" href="/static/assets/css/animate.css">
+   <link rel="stylesheet" href="/static/assets/css/slick.css">
+   <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/static/assets/css/nice-select.css">
+   <link rel="stylesheet" href="/static/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/static/assets/css/elegent-icons.css">
+   <link rel="stylesheet" href="/static/assets/css/spacing.css">
+   <link rel="stylesheet" href="/static/assets/css/main.css">
+   <!-- css end  here-->
+</head>
+
+<body>
+   <!--[if lte IE 9]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+      <![endif]-->
+
+
+    <!-- back to top start -->
+    <button class="tp-backtotop">
+      <span><i class="fal fa-angle-double-up"></i></span>
+   </button>
+   <!-- back to top end -->
+
+
+   <!-- header area start -->
+   <header>
+      <div class="tp-header__area tp-header__transparent">
+         <div class="tp-header__main" id="header-sticky">
+            <div class="container">
+               <div class="row align-items-center">
+                  <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-6">
+                     <div class="logo has-border">
+                        <a href="/">
+                           <img src=" {% static 'assets/img/logo/white-logo.png' %} " alt="logo">
+                        </a>
+                     </div>
+                  </div>
+                  <div class="col-xxl-7 col-xl-7 col-lg-7 d-none d-lg-block">
+                     <div class="main-menu">
+                        <nav id="mobile-menu">
+                           <ul>
+                              <li>
+                                 <a href="/">Home</a>
+                              </li>
+                              <li>
+                                 <a href="/about">About</a>
+                              </li>
+                              <li>
+                                 <a href="/category_course">Courses</a>
+                              </li>
+
+<!--                              <li class="has-dropdown">-->
+<!--                                 <a href=" {% static 'blog.html' %} ">Blog</a>-->
+<!--                                 <ul class="submenu">-->
+<!--                                    <li><a href=" {% static 'blog.html' %} ">Blog</a></li>-->
+<!--                                    <li><a href=" {% static 'blog-details.html' %} ">Blog Details</a></li>-->
+<!--                                 </ul>-->
+<!--                              </li>-->
+                              {%if request.session.log_id%}
+                              {%if is_tutor%}
+                              <li>
+                                 <a href="/add_expertise"> Expertise</a>
+                              </li>
+                              <li>
+                                 <a href="/request_student">Request</a>
+                              </li>
+                              {%else%}
+                              <li>
+                                 <a href="/user-orders">Request</a>
+                              </li>
+                              <li>
+                                 <a href="/storefeedback">Feedback</a>
+                              </li>
+
+                              {%endif%}
+                              {%endif%}
+                              <li>
+                                 <a href="/contact">Contact</a>
+                              </li>
+                               {%if request.session.log_id%}
+                                    <li><a href="/logout">Logout</a></li>
+                                    {%else%}
+                                    <li><a href="/login">Sign In</a></li>
+                                    <li><a href="/signup">Sign Up</a></li>
+                                    {%endif%}
+                           </ul>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- header area end -->
+
+   <!-- offcanvas area start -->
+   <div class="offcanvas__area" >
+      <div class="offcanvas__wrapper">
+         <div class="offcanvas__content">
+            <div class="offcanvas__close text-end">
+               <button class="offcanvas__close-btn offcanvas-close-btn">
+                  <i class="fal fa-times"></i>
+               </button>
+            </div>
+            <div class="offcanvas__top mb-40">
+               <div class="offcanvas__subtitle">
+                  <span class="text-white d-inline-block mb-25 d-none d-lg-block">ELEVATE YOUR BUSINESS WITH</span>
+               </div>
+               <div class="offcanvas__logo mb-40">
+                  <a href=" {% static 'index.html' %} ">
+                     <img src=" {% static 'assets/img/logo/logo.png' %} " alt="logo">
+                  </a>
+               </div>
+               <div class="offcanvas-info d-none d-lg-block">
+                  <p>Limitless customization options & Elementor compatibility let anyone create a beautiful website
+                     with Valiance. </p>
+               </div>
+               <div class="offcanvas__btn d-none d-lg-block">
+                  <a href=" {% static 'contact.html' %} " class="tp-btn">Contact us <span></span></a>
+               </div>
+            </div>
+            <div class="mobile-menu fix mb-40"></div>
+
+
+            <div class="offcamvas__bottom">
+               <div class="offcanvas__cta mt-30 mb-20">
+                  <h3 class="offcanvas__cta-title">Contact info</h3>
+                  <span>27 Division St, New York,</span>
+                  <span>+154 4808 84082 4830</span>
+                  <span><a href="https://data.themeim.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="65161015150a1711250b0a1d0c044b060a08">[email&#160;protected]</a></span>
+                  <span>Office Hours: 8AM - 5PM</span>
+                  <span>Sunday - Wekend Day</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="body-overlay"></div>
+   <!-- offcanvas area end -->
+
+{%block main%}
+
+{%endblock%}
+
+   <!-- footer area start -->
+    <footer>
+      <div class="footer__area grey-bg">
+         <div class="container">
+            <div class="footer__top ">
+               <div class="row">
+                  <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+                     <div class="footer__widget mb-50 footer-col-1">
+                        <div class="footer__widget-logo mb-30">
+                          <a href=" {% static 'index.html' %} "><img src=" {% static 'assets/img/logo/logo.png' %} " alt=""></a>
+                        </div>
+                        <div class="footer__widget-content">
+                           <p></p>
+                           <div class="footer__social">
+                              <span><a href="#"><i class="fab fa-facebook-f"></i></a></span>
+                              <span><a href="#" class="yt"><i class="fab fa-youtube"></i></a></span>
+                              <span><a href="#" class="tw"><i class="fab fa-twitter"></i></a></span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xxl-2 col-xl-2 col-lg-3 col-6">
+                     <div class="footer__widget mb-50 footer-col-2">
+                        <h3 class="footer__widget-title">Information</h3>
+                        <div class="footer__widget-content">
+                           <ul>
+                              <li><a href="/about">About Us</a></li>
+                              <li><a href="/contact">Contact</a></li>
+                              <li><a href="/category_course">Course</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-xxl-4 col-xl-4 col-lg-3 col-md-6">
+                     <div class="footer__widget mb-50 footer-col-4">
+                        <h3 class="footer__widget-title">Sign Up for Our Newsletter</h3>
+                        <div class="footer__widget-content">
+                           <div class="footer__subscribe">
+                              <p>Receive weekly newsletter with educational,
+                                 popular books and much more!</p>
+                              <form action="#">
+                                 <div class="footer__subscribe-box">
+                                    <div class="footer__subscribe-input">
+                                       <input type="email" placeholder="Email address">
+                                    </div>
+                                    <button class="footer-sub-btn" type="submit">Subscribe</button>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </footer>
+   <!-- footer area end -->
+
+   <!-- JS here -->
+   <script data-cfasync="false" src=" {% static '/../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %} "></script><script src="/static/assets/js/vendor/jquery.js"></script>
+   <script src="/static/assets/js/vendor/waypoints.js"></script>
+   <script src="/static/assets/js/bootstrap-bundle.js"></script>
+   <script src="/static/assets/js/meanmenu.js"></script>
+   <script src="/static/assets/js/slick.js"></script>
+   <script src="/static/assets/js/magnific-popup.js"></script>
+   <script src="/static/assets/js/parallax.js"></script>
+   <script src="/static/assets/js/nice-select.js"></script>
+   <script src="/static/assets/js/counterup.js"></script>
+   <script src="/static/assets/js/wow.js"></script>
+   <script src="/static/assets/js/isotope-pkgd.js"></script>
+   <script src="/static/assets/js/imagesloaded-pkgd.js"></script>
+   <script src="/static/assets/js/ajax-form.js"></script> <script src="/static/assets/js/countdown.js"></script>
+   <script src="/static/assets/js/main.js"></script>
+</body>
+
+
+<!-- Mirrored from data.themeim.com/html/tutorgo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Aug 2025 05:01:01 GMT -->
+</html>

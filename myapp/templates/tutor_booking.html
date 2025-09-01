@@ -1,0 +1,97 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block main%}
+{% include 'messages.html'%}
+
+<style>
+    .custom-form {
+    padding: 20px;
+}
+
+.custom-form .form-control, .custom-form .form-select {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+}
+
+.custom-form button {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-form button:hover {
+    background-color: #007bff;
+    transform: translateY(-2px);
+}
+
+.custom-form .card {
+    border-radius: 15px;
+}
+
+</style>
+   <main>
+
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         data-background="/static/assets/img/breadcrumb/breadcrumb-bg.jpg">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content p-relative z-index-1">
+                     <h3 class="breadcrumb__title">Tutor</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span>Tutor</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+       <br><br><br>
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Book Tutor</h2>
+                    <form class="custom-form" method="POST" action="{% url 'add_tutor_booking' tutordata.id %}">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">End Date</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact_email" class="form-label">Contact Email</label>
+                            <input type="email" class="form-control" id="contact_email" name="contact_email" placeholder="Enter contact email" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="communication_preference" class="form-label">Preferred Communication Method</label>
+                            <select class="form-select" id="communication_preference" name="communication_preference" required>
+                                <option value="" disabled selected>Select a communication method</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone</option>
+                                <option value="video_call">Video Call</option>
+                            </select>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Book Freelancer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+
+   </main>
+
+{%endblock%}

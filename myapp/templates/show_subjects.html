@@ -1,0 +1,81 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block main%}
+{% include 'messages.html'%}
+   <main>
+
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         data-background="/static/assets/img/breadcrumb/breadcrumb-bg-2.jpg">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content p-relative z-index-1">
+                     <h3 class="breadcrumb__title">Subjects</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                        <span>Subjects</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+
+      <!-- course area start -->
+      <section class="course__area pt-120 pb-120">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="course__tab-conent pb-40">
+                     <div class="tab-content" id="courseTabContent">
+                        <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
+                           <!-- course start  -->
+                           <div class="tp-courses-2__section">
+                              <div class="tp-courses-2__tab-content">
+                                 <div class="row">
+                                    {%for i in available_subjects%}
+                                    <div class="col-lg-4 col-md-6">
+                                       <div class="tp-courses__item mb-30">
+                                          <div class="tp-courses__thumb w-img fix p-relative">
+                                             <img src="{{i.subject_image.url}}" alt="">
+                                             <span class="tp-courses__cat cat-color-1"><a href="#">{{i.course.name}}</a></span>
+                                          </div>
+                                          <div class="tp-courses__content white-bg">
+                                             <h3 class="tp-courses__title"><a href="#">{{i.name}}</a></h3>
+                                             <div class="tp-courses__avata">
+                                                {{i.description}}
+                                             </div>
+
+                                             <div class="tp-courses__price d-flex justify-content-between">
+                                                {%if not is_tutor%}
+                                                <div class="tp-courses__time">
+                                                   <span><a href="/tutors/{{i.id}}/" class="more-btn">View Tutor <i
+                                                            class="fa-regular fa-arrow-right"></i></a></span>
+                                                </div>
+                                                {%endif%}
+                                             </div>
+
+                                          </div>
+                                       </div>
+                                    </div>
+                                    {%endfor%}
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- course end  -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- course area end -->
+
+   </main>
+
+
+{%endblock%}
